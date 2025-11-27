@@ -1,44 +1,52 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Header from '../../components/Header';
- 
-// Mock user data
+
+// Mock user data for a homeowner
 const userData = {
-  name: 'John Doe',
-  email: 'john.doe@example.com',
-  bio: 'Passionate developer and tech enthusiast. Loves coding and coffee.',
-  avatar: 'https://via.placeholder.com/150', // Placeholder image URL
-  followers: 150,
-  following: 200,
+  name: 'John Smith',
+  email: 'johnsmith@example.com',
+  avatar: 'https://via.placeholder.com/100', // Placeholder avatar image
+  bio: 'Reliable homeowner seeking skilled professionals for household repairs, maintenance, and improvements. Committed to fair pay and quality work.',
+  jobsPosted: 12,
+  jobsCompleted: 8,
+  rating: 4.8,
 };
 
 const ProfileScreen = () => {
   return (
     <>
-    <Header 
-        title="Profile"
-    />
-    <View style={styles.container}>
-      <View style={styles.profileHeader}>
-        <Image source={{ uri: userData.avatar }} style={styles.avatar} />
-        <Text style={styles.name}>{userData.name}</Text>
-        <Text style={styles.email}>{userData.email}</Text>
-      </View>
-      <Text style={styles.bio}>{userData.bio}</Text>
-      <View style={styles.statsContainer}>
-        <View style={styles.stat}>
-          <Text style={styles.statNumber}>{userData.followers}</Text>
-          <Text style={styles.statLabel}>Followers</Text>
+      <Header 
+        title="Homeowner Profile"
+      />
+      <ScrollView style={styles.container}>
+        <View style={styles.profileHeader}>
+          <Image source={{ uri: userData.avatar }} style={styles.avatar} />
+          <Text style={styles.name}>{userData.name}</Text>
+          <Text style={styles.email}>{userData.email}</Text>
         </View>
-        <View style={styles.stat}>
-          <Text style={styles.statNumber}>{userData.following}</Text>
-          <Text style={styles.statLabel}>Following</Text>
+        <Text style={styles.bio}>{userData.bio}</Text>
+        <View style={styles.statsContainer}>
+          <View style={styles.stat}>
+            <Text style={styles.statNumber}>{userData.jobsPosted}</Text>
+            <Text style={styles.statLabel}>Jobs Posted</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={styles.statNumber}>{userData.jobsCompleted}</Text>
+            <Text style={styles.statLabel}>Jobs Completed</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={styles.statNumber}>{userData.rating}</Text>
+            <Text style={styles.statLabel}>Average Rating</Text>
+          </View>
         </View>
-      </View>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Edit Profile</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Post a Job</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.secondaryButton]}>
+          <Text style={styles.buttonText}>View My Jobs</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </>
   );
 };
@@ -48,7 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
     padding: 20,
-    alignItems: 'center',
   },
   profileHeader: {
     alignItems: 'center',
@@ -101,6 +108,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 8,
+    marginBottom: 15,
+    alignSelf: 'center',
+  },
+  secondaryButton: {
+    backgroundColor: '#28a745',
   },
   buttonText: {
     color: '#fff',
